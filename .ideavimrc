@@ -1,0 +1,9 @@
+set rnu
+set number
+set surround
+vnoremap // y/<C-R>"<CR>
+imap jj <Esc>
+
+nmap gi :action GotoImplementation<CR>
+nmap gu :action FindUsages<CR>
+nmap gs :action GotoSuperMethod<CR> 

@@ -1,0 +1,8 @@
+#To open a file with an appropriate application
+	xdg-open file
+
+#To run git status on all sub folders
+ls -1 | xargs -I % sh -c 'cd %; pwd; git status;'
+
+#Some grep idea
+zgrep ",3350," *20171227-16* |sort -t" " -nsk2,2 |less

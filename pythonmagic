@@ -1,0 +1,11 @@
+#To create a virtual environment in python 2.7
+	virtualenv venv
+#and in 3.x
+	python3 -m venv venv
+
+#To export virtual environment requirements to a text file (assuming you've run something like source venv/bin/activate)
+	pip freeze > requirements.txt
+
+#To install requirements from a text file
+	pip install -r requirements.txt
+	

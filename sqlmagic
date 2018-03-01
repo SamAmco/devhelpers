@@ -1,0 +1,9 @@
+A LIST OF ALL TABLES
+select tablespace_name, table_name from all_tables where table_name like '%ATLAS%' and tablespace_name like '%DBA%';
+
+PRODUCTION JOB STATUS'
+select * from dba_jobs;
+
+TO TRACK THE LOCATION HISTORY OF A CONTAINER (I only know this works for ASRS)
+select * from mhe_container_event_history
+
