@@ -1,0 +1,45 @@
+set nocompatible	" required
+filetype off		" required
+
+" set the runtime path to include Vundle and initialize 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'jnurmine/Zenburn'
+Plugin 'tpope/vim-dispatch'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()		" required
+filetype plugin indent on 	" required
+
+let mapleader=","
+
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_register_as_syntastic_checker = 0
+map <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>yr :YcmCompleter GoToReferences<ENTER>
+
+let g:syntastic_enable_signs = 0
+
+syntax on
+set relativenumber
+set number
+set mouse=a
+set ssop-=options    " do not store global and local values in a session
+"set ssop-=folds      " do not store folds
+
+imap jj <Esc>
+vnoremap // y/<C-R>"<CR>
