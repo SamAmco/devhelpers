@@ -1,0 +1,15 @@
+#!/bin/bash
+#set -e
+
+ssh sam@10.0.0.1 "ls /home/sam/Documents/MEND\ logs/Enc" > a
+mend get -e | xargs -I % echo %.enc > b
+sort a > a1
+sort b > b1
+diff a1 b1 > c
+sed -n 's/> \(.*\)/scp \/home\/sam\/Documents\/MEND\/Enc\/\1 sam@10.0.0.1:"\/home\/sam\/Documents\/MEND\\ logs\/Enc\/\1"/p' c > to
+sed -n 's/< \(.*\)/scp sam@10.0.0.1:"\/home\/sam\/Documents\/MEND\\ logs\/Enc\/\1" \/home\/sam\/Documents\/MEND\/Enc\/\1/p' c > from
+chmod +x to
+chmod +x from 
+./to
+./from 
+rm a b a1 b1 c to from
