@@ -14,11 +14,11 @@ Plugin 'VundleVim/Vundle.vim'
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'jnurmine/Zenburn'
 Plugin 'tpope/vim-dispatch'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vim-scripts/Rename2'
 
 
 " All of your Plugins must be added before the following line
@@ -30,7 +30,7 @@ let mapleader=","
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_register_as_syntastic_checker = 0
 map <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>yr :YcmCompleter GoToReferences<ENTER>
+map <leader>yr :YcmCompleter GoToReferences<CR>
 
 let g:syntastic_enable_signs = 0
 
@@ -43,3 +43,4 @@ set ssop-=options    " do not store global and local values in a session
 
 imap jj <Esc>
 vnoremap // y/<C-R>"<CR>
+set hlsearch
