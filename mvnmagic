@@ -1,7 +1,0 @@
-#To run dbmaintain of the current project against your local database
-mvn dbmaintain:updateDatabase -Ddb.url=jdbc:oracle:thin:@//localhost:9202/xe 
-
-#To install a jar file in your .m2 repositories
-mvn install:install-file -Dfile="location-service-jdk6-client/build/libs/location-service-jdk6-client-0.1.14-SNAPSHOT.jar" -DgroupId=com.ocado.ocean.cfc.locationservice -DartifactId=location-service-jdk6-client -Dversion=0.1.14-SNAPSHOT -Dpackaging=jar
-
-

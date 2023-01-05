@@ -1,0 +1,108 @@
+""" -------- Mapppings --------------
+let mapleader=" "
+
+imap kj <Esc>
+
+vnoremap // y/<C-R>"<CR>
+vnoremap <leader>m :action ExtractFunction<CR>
+
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gh :action ShowErrorDescription<CR>
+nnoremap <leader>l :action NextTab<CR>
+nnoremap <leader>h :action PreviousTab<CR>
+nnoremap <leader>u :action FindUsages<CR>
+nnoremap <leader>f :action GotoFile<CR>
+nnoremap <leader>c :action HideActiveWindow<CR>
+nnoremap <leader>e :action Move<CR>
+nnoremap <leader>d :action SafeDelete<CR>
+nnoremap <leader>i :action SelectInProjectView<CR>
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>q :action CloseContent<CR>
+nnoremap <leader>w :action SaveAll<CR>
+
+""" -------- PLUGINS ----------------
+
+"""  "Hello *world!"           ds"         Hello world!
+"""  [123+4*56]/2              cs])        (123+456)/2
+"""  "Look ma, I'm *HTML!"     cs"<q>      <q>Look ma, I'm HTML!</q>
+"""  if *x>3 {                 ysW(        if ( x>3 ) {
+"""  my $str = *whee!;         vllllS'     my $str = 'whee!';
+"""  <div>Yo!*</div>           dst         Yo!
+"""  "hello"                   ysWfprint<cr>     print("hello")
+""" https://github.com/tpope/vim-surround/blob/master/doc/surround.txt
+set surround
+
+"""                                                 *gc*
+""" gc{motion}              Comment or uncomment lines that [ motion ] moves over.
+"""
+"""                                                 *gcc*
+""" gcc                     Comment or uncomment [count] lines.
+"""
+"""                                                 *v_gc*
+""" {Visual}gc              Comment or uncomment the highlighted lines.
+"""
+"""                                                 *o_gc*
+""" gc                      Text object for a comment (operator pending mode
+"""                         only.)
+"""
+"""                                                 *gcgc* *gcu*
+""" gcgc                    Uncomment the current and adjacent commented lines.
+""" gcu
+set commentary
+
+""" [count]["x]gr{motion}	Replace {motion} text with the contents of register x.
+""" 			Especially when using the unnamed register, this is
+""" 			quicker than "_d{motion}P or "_c{motion}<C-R>"
+""" [count]["x]grr		Replace [count] lines with the contents of register x.
+""" 			To replace from the cursor position to the end of the
+""" 			line use ["x]gr$
+""" {Visual}["x]gr		Replace the selection with the contents of register x.
+set ReplaceWithRegister
+
+""" highlights the yanked text
+set highlightedyank
+
+""" Lines with whitespace are also matched with { and }
+set vim-paragraph-motion
+
+""" Adds an argtextobj a for functions like function(arg: X, arg2: Y) e.g. yia, daa, cia, etc.
+set argtextobj
+
+""" Supports sneaking with s and S and ; and , to repeat
+""" set sneak
+
+""" cx{motion}              Used in pairs.
+"""                            FIRST USE: define the first region of text to be
+"""                            exchanged. Any valid {motion} can be used.
+"""                            SECOND USE: define the second region of text and
+"""                            perform the exchange.
+"""                            Note: If a region was defined accidentally, it can
+"""                            be cleared with |cxc|
+"""
+"""                                                    *cxx* *exchange-define-line*
+"""    cxx                     Like |cx|, but for the current line. |linewise|
+"""
+"""                                                    *cxc* *exchange-clear*
+"""    cxc                     Clear any defined region of text (previously defined
+"""                            by a |cx| command)
+"""
+"""                                                    *v_X* *exchange-visual*
+"""    {Visual}X               Can be used in |visual-mode|.
+set exchange
+
+""" provide text objects (|ae| and |ie| by
+"""    default) to select the entire content of a buffer.  Though these are trivial
+"""    operations (e.g. `ggVG`), text object versions are more handy, because you do
+"""    not have to be conscious of the cursor position (e.g. `vae`).
+set textobj-entire
+
+""" -------- Common settings --------
+set visualbell
+set noerrorbells
+set hlsearch
+set relativenumber
+set number
+set incsearch
+set ignorecase smartcase
+set clipboard+=unnamedplus
