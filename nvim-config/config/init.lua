@@ -10,6 +10,10 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+--Fix the errors in the sign column shifting the text by forcing sign column to 
+--show always
+vim.o.signcolumn="yes"
+
 --Prettier
 vim.g['prettier#autoformat'] = 1
 vim.g['prettier#config#use_tabs'] = 1

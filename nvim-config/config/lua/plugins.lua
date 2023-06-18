@@ -52,27 +52,24 @@ require('packer').startup(function(use)
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
         config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
+            require("nvim-surround").setup()
         end
     })
 
-    use {
-        "zbirenbaum/copilot.lua",
-        config = function()
-            require("copilot").setup({
-                suggestion = {enabled = false},
-                panel = {enabled = false},
-            })
-        end
-    }
+    use { "zbirenbaum/copilot.lua" }
 
     use {
         "zbirenbaum/copilot-cmp",
         after = { "copilot.lua" },
-        config = function ()
-            require("copilot_cmp").setup()
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                panel = {enabled = false},
+                suggestion = {
+                    enabled = false,
+                    auto_trigger = true
+                },
+            })
         end
     }
 
@@ -133,7 +130,7 @@ lsp.setup()
 
 
 
---ONE-DARK
+--ONE-DARK THEME
 -- Set the color scheme
 require('onedark').setup {
     -- options are dark, darker, cool, deep, warm and warmer
@@ -145,17 +142,40 @@ require('onedark').load()
 
 --CMP AND COPILOT
 local cmp = require('cmp')
+
+--Unlike other completion sources, copilot can use other lines above or below an empty line to provide a completion. This can cause problematic for individuals that select menu entries with <TAB>. This behavior is configurable via cmp's config and the following code will make it so that the menu still appears normally, but tab will fallback to indenting unless a non-whitespace character has actually been typed.
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
 cmp.setup({
   sources = {
     {name = 'copilot'},
     {name = 'nvim_lsp'},
   },
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({
-      -- documentation says this is important.
-      -- I don't know why.
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    })
+      -- Ctrl space to force suggestions from copilot
+      ["<C-space>"] = cmp.mapping(
+          cmp.mapping.complete { reason = cmp.ContextReason.Auto },
+          { "i", "c" }
+      ),
+      ["<Tab>"] = vim.schedule_wrap(function(fallback)
+          if cmp.visible() and has_words_before() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          else
+              fallback()
+          end
+      end),
+
+      ['<CR>'] = cmp.mapping.confirm({
+          -- documentation says this is important.
+          -- I don't know why.
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = false,
+      })
   }
 })
+
+
