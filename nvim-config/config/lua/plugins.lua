@@ -37,7 +37,6 @@ require('packer').startup(function(use)
             {'hrsh7th/nvim-cmp'},
 
             -- Autocompletion
-            {'hrsh7th/cmp-buffer'},
             {'hrsh7th/cmp-path'},
             {'saadparwaiz1/cmp_luasnip'},
             {'hrsh7th/cmp-nvim-lsp'},
@@ -56,20 +55,23 @@ require('packer').startup(function(use)
         end
     })
 
-    use { "zbirenbaum/copilot.lua" }
-
     use {
-        "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
         event = "InsertEnter",
         config = function()
             require("copilot").setup({
                 panel = {enabled = false},
-                suggestion = {
-                    enabled = false,
-                    auto_trigger = true
-                },
+                suggestion = { enabled = false },
             })
+        end,
+    }
+
+    use { 
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function ()
+            require("copilot_cmp").setup()
         end
     }
 
@@ -151,31 +153,39 @@ local has_words_before = function()
 end
 
 cmp.setup({
-  sources = {
-    {name = 'copilot'},
-    {name = 'nvim_lsp'},
-  },
-  mapping = {
-      -- Ctrl space to force suggestions from copilot
-      ["<C-space>"] = cmp.mapping(
-          cmp.mapping.complete { reason = cmp.ContextReason.Auto },
-          { "i", "c" }
-      ),
-      ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-          else
-              fallback()
-          end
-      end),
+    snippet = {
+        expand = function(args)
+            -- Documentation says you need this 
+            require('luasnip').lsp_expand(args.body)
+        end
+    },
+    sources = {
+        {name = 'copilot', group_index = 2 },
+        {name = 'nvim_lsp', group_index = 2 },
+        {name = 'path', group_index = 2 },
+        {name = 'luasnip', group_index = 2}
+    },
+    mapping = {
+        -- Ctrl space to force suggestions from copilot
+        ["<C-space>"] = cmp.mapping(
+            cmp.mapping.complete { reason = cmp.ContextReason.Auto },
+            { "i", "c" }
+        ),
+        ["<Tab>"] = vim.schedule_wrap(function(fallback)
+            if cmp.visible() and has_words_before() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            else
+                fallback()
+            end
+        end),
 
-      ['<CR>'] = cmp.mapping.confirm({
-          -- documentation says this is important.
-          -- I don't know why.
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-      })
-  }
+        ['<CR>'] = cmp.mapping.confirm({
+            -- documentation says this is important.
+            -- I don't know why.
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        })
+    }
 })
 
 
