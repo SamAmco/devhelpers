@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("i", "kj", "<Esc>", { noremap = true })
 vim.keymap.set('v', '//', 'y/<C-R>"<CR>')
+vim.keymap.set('n', '<leader>w', ':w<CR>')
 
 vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.o.clipboard = "unnamedplus,unnamed"
