@@ -6,18 +6,25 @@ imap kj <Esc>
 vnoremap // y/<C-R>"<CR>
 vnoremap <leader>m :action ExtractFunction<CR>
 
-nnoremap gi :action GotoImplementation<CR>
+""" Copying my astrovim config
+nnoremap <leader>ld :action ShowErrorDescription<CR>
+nnoremap gl :action ShowErrorDescription<CR>
+nnoremap gI :action GotoImplementation<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gh :action ShowErrorDescription<CR>
-nnoremap <leader>l :action NextTab<CR>
-nnoremap <leader>h :action PreviousTab<CR>
-nnoremap <leader>u :action FindUsages<CR>
-nnoremap <leader>f :action GotoFile<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap <leader>lR :action FindUsages<CR>
+nnoremap <leader>lr :action RenameElement<CR>
+nnoremap <leader>. :action NextTab<CR>
+nnoremap <leader>, :action PreviousTab<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+""" TODO wanna make <leader>lf do Ctrl+Alt+l
+
+""" idea specific stuff
 nnoremap <leader>c :action HideActiveWindow<CR>
 nnoremap <leader>e :action Move<CR>
 nnoremap <leader>d :action SafeDelete<CR>
 nnoremap <leader>i :action SelectInProjectView<CR>
-nnoremap <leader>r :action RenameElement<CR>
 nnoremap <leader>q :action CloseContent<CR>
 nnoremap <leader>w :action SaveAll<CR>
 
