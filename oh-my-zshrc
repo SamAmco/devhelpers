@@ -104,9 +104,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # 
+
+# Custom aliases
 alias vim="nvim"
 
+# Environment variables
+export ANDROID_HOME=$HOME/Library/Android/sdk
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# Git aliases
 alias g=git
 alias ga='git add'
 alias gaa='git add --all'
