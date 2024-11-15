@@ -109,7 +109,15 @@ source $ZSH/oh-my-zsh.sh
 alias vim="nvim"
 
 # Environment variables
+export JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/temurin-17.0.13/Contents/Home
 export ANDROID_HOME=$HOME/Library/Android/sdk
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin/mend
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
@@ -209,3 +217,4 @@ alias gs='git status'
 alias gswd='git switch $(git_develop_branch)'
 alias gswm='git switch $(git_main_branch)'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
+alias fzb='git checkout $(git branch | fzf)'
