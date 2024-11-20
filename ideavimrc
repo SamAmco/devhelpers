@@ -1,10 +1,21 @@
 """ -------- Mapppings --------------
 let mapleader=" "
 
+""" -------- Common settings --------
+set visualbell
+set noerrorbells
+set hlsearch
+set relativenumber
+set number
+set incsearch
+set ignorecase smartcase
+set clipboard+=unnamedplus
+
 imap kj <Esc>
 
 vnoremap // y/<C-R>"<CR>
 vnoremap <leader>m :action ExtractFunction<CR>
+vnoremap <leader>/ :action CommentByLineComment<CR>
 
 """ Copying my astrovim config
 nnoremap <leader>ld :action ShowErrorDescription<CR>
@@ -18,7 +29,7 @@ nnoremap <leader>lr :action RenameElement<CR>
 nnoremap <leader>. :action NextTab<CR>
 nnoremap <leader>, :action PreviousTab<CR>
 nnoremap <leader>ff :action GotoFile<CR>
-""" TODO wanna make <leader>lf do Ctrl+Alt+l
+nnoremap <leader>lf :action ReformatCode<CR>
 
 """ idea specific stuff
 nnoremap <leader>c :action HideActiveWindow<CR>
@@ -104,12 +115,3 @@ set exchange
 """    not have to be conscious of the cursor position (e.g. `vae`).
 set textobj-entire
 
-""" -------- Common settings --------
-set visualbell
-set noerrorbells
-set hlsearch
-set relativenumber
-set number
-set incsearch
-set ignorecase smartcase
-set clipboard+=unnamedplus
