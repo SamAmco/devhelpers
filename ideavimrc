@@ -15,7 +15,7 @@ imap kj <Esc>
 
 vnoremap // y/<C-R>"<CR>
 vnoremap <leader>m :action ExtractFunction<CR>
-vnoremap <leader>/ :action CommentByLineComment<CR>
+vnoremap <leader>/ :action CommentByLineComment<CR>VV<CR>
 
 """ Copying my astrovim config
 nnoremap <leader>ld :action ShowErrorDescription<CR>
