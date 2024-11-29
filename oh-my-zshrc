@@ -119,7 +119,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/bin/mend
 
-export NPM_TOKEN='<redacted>'
+export NPM_TOKEN=''
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
@@ -129,7 +129,7 @@ alias g=git
 alias ga='git add'
 alias gaa='git add --all'
 alias gav='git add --verbose'
-alias gb='git branch'
+alias gb='git --no-pager branch'
 alias gbD='git branch --delete --force'
 alias gba='git branch --all'
 alias gbd='git branch --delete'
@@ -162,7 +162,7 @@ alias gcor='git checkout --recurse-submodules'
 alias gcount='git shortlog --summary --numbered'
 alias gcp='git cherry-pick'
 alias gd='git diff'
-alias gdca='git diff --cached'
+alias gdc='git diff --cached'
 alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
 alias gds='git diff --staged'
 alias gdw='git diff --word-diff'
