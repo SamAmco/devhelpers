@@ -1,0 +1,138 @@
+# Prompt
+PROMPT='%F{cyan}%~%f $ '
+
+# Colors for ls
+export CLICOLOR=1
+
+# Completion
+autoload -Uz compinit && compinit
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
+# Aliases
+alias vim="nvim"
+
+# Environment variables
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/bin/mend
+export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:$HOME/.cargo/bin
+
+export NPM_TOKEN=''
+
+export HOMEBREW_GITHUB_API_TOKEN=redacted
+export HOMEBREW_GITHUB_PACKAGES_TOKEN=redacted
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# rbenv setup
+eval "$(rbenv init - zsh)"
+
+alias cclip='pbcopy'
+
+# Git aliases
+alias g=git
+alias ga='git add'
+alias gaa='git add --all'
+alias gav='git add --verbose'
+alias gb='git --no-pager branch'
+alias gbD='git branch --delete --force'
+alias gba='git branch --all'
+alias gbd='git branch --delete'
+alias gbl='git blame -w'
+alias gbm='git branch --move'
+alias gbnm='git branch --no-merged'
+alias gbr='git branch --remote'
+alias gbs='git bisect'
+alias gbsb='git bisect bad'
+alias gbsg='git bisect good'
+alias gbsn='git bisect new'
+alias gbso='git bisect old'
+alias gbsr='git bisect reset'
+alias gbss='git bisect start'
+alias gc='git commit --verbose'
+alias 'gc!'='git commit --verbose --amend'
+alias gcB='git checkout -B'
+alias gcb='git checkout -b'
+alias gcf='git config --list'
+alias gcl='git clone --recurse-submodules'
+alias gclean='git clean --interactive -d'
+alias gclf='git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules'
+alias gcmsg='git commit --message'
+alias gcn='git commit --verbose --no-edit'
+alias 'gcn!'='git commit --verbose --no-edit --amend'
+alias gco='git checkout'
+alias gcor='git checkout --recurse-submodules'
+alias gcount='git shortlog --summary --numbered'
+alias gcp='git cherry-pick'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdn='git diff --name-only'
+alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
+alias gds='git diff --staged'
+alias gdw='git diff --word-diff'
+alias gf='git fetch'
+alias gfa='git fetch --all --tags --prune --jobs=10'
+alias gfg='git ls-files | grep'
+alias gfo='git fetch origin'
+alias ghh='git help'
+alias gignore='git update-index --assume-unchanged'
+alias gignored='git ls-files -v | grep "^[[:lower:]]"'
+alias gpl='git pull'
+alias gl='git log'
+alias glgg='git log --graph'
+alias glgga='git log --graph --decorate --all'
+alias glgm='git log --graph --max-count=10'
+alias glgp='git log --stat --patch'
+alias glo='git log --oneline --decorate'
+alias glod='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"'
+alias glods='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias glola='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
+alias gm='git merge'
+alias gp='git push'
+alias gpv='git push --verbose'
+alias gr='git remote'
+alias gra='git remote add'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase --interactive'
+alias grbo='git rebase --onto'
+alias grbs='git rebase --skip'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}'
+alias grf='git reflog'
+alias grh='git reset --hard'
+alias grhh='git reset --hard HEAD'
+alias grv='git remote --verbose'
+alias gsb='git status --short --branch'
+alias gsd='git svn dcommit'
+alias gsh='git show'
+alias gsps='git show --pretty=short --show-signature'
+alias gss='git status --short'
+alias gs='git status'
+alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
+alias gcof='git checkout $(git branch | fzf)'
+alias gcofa='git checkout $(echo $(git branch -a | fzf) | sed "s#^remotes/origin/##;s#^origin/##")'
+alias gdmp='git commit -m "Git dump"'
+alias gudmp='git reset --mixed HEAD~1'
+
+# jj aliases
+alias jst='jj st'
