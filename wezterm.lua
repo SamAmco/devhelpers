@@ -4,11 +4,13 @@ local config = {}
 config.automatically_reload_config = true
 config.enable_kitty_keyboard = true
 config.font = wezterm.font 'JetBrains Mono'
-config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'Tokyo Night Moon'
 -- config.color_scheme = 'Batman'
 -- config.color_scheme = 'Catppuccin Macchiato'
 
 config.keys = {
+  { key = 'Backspace', mods = 'ALT', action = wezterm.action.SendKey { key = 'w', mods = 'CTRL' } },
+  { key = 'Backspace', mods = 'CTRL', action = wezterm.action.SendString '\x15' },
   {
     key = '%',
     mods = 'CTRL|SHIFT',
@@ -41,6 +43,10 @@ config.keys = {
   { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
   { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
   { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'h', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'l', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Right' },
+  { key = 'k', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'j', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Down' },
 }
 
 local mux = wezterm.mux
