@@ -1,10 +1,17 @@
 local wezterm = require("wezterm")
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+local resurrect_loaded, resurrect = pcall(wezterm.plugin.require, "https://github.com/MLFlexer/resurrect.wezterm")
+if not resurrect_loaded then
+  wezterm.log_error("resurrect plugin failed to load: " .. tostring(resurrect))
+end
 local config = {}
 
 config.automatically_reload_config = true
 config.enable_kitty_keyboard = true
 config.font = wezterm.font 'JetBrains Mono'
+config.font_size = 22
+config.window_frame = {
+  font_size = 18,
+}
 config.color_scheme = 'Tokyo Night Moon'
 config.window_close_confirmation = 'NeverPrompt'
 config.audible_bell = 'Disabled'
@@ -85,7 +92,9 @@ config.keys = {
     key = 'w',
     mods = 'ALT',
     action = wezterm.action_callback(function(win, pane)
-      resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+      if resurrect_loaded then
+        resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+      end
     end),
   },
   -- restore workspaces
@@ -93,6 +102,7 @@ config.keys = {
     key = "r",
     mods = "ALT",
     action = wezterm.action_callback(function(win, pane)
+      if not resurrect_loaded then return end
       resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, "^([^/]+)") -- match before '/'
         id = string.match(id, "([^/]+)$")         -- match after '/'
