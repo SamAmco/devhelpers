@@ -77,6 +77,8 @@ config.keys = {
   { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
   { key = 'j', mods = 'ALT', action = wezterm.action.ScrollByLine(1) },
   { key = 'k', mods = 'ALT', action = wezterm.action.ScrollByLine(-1) },
+  { key = 'e', mods = 'ALT', action = wezterm.action.ScrollByLine(1) },
+  { key = 'y', mods = 'ALT', action = wezterm.action.ScrollByLine(-1) },
   { key = 'd', mods = 'ALT', action = wezterm.action.ScrollByPage(0.5) },
   { key = 'u', mods = 'ALT', action = wezterm.action.ScrollByPage(-0.5) },
 
