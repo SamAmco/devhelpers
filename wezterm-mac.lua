@@ -19,6 +19,12 @@ config.audible_bell = 'Disabled'
 config.keys = {
   { key = 'Backspace', mods = 'ALT',  action = wezterm.action.SendKey { key = 'w', mods = 'CTRL' } },
   { key = 'Backspace', mods = 'CTRL', action = wezterm.action.SendString '\x15' },
+  -- Alt+arrows: move cursor by word
+  { key = 'LeftArrow',  mods = 'ALT', action = wezterm.action.SendKey { key = 'b', mods = 'ALT' } },
+  { key = 'RightArrow', mods = 'ALT', action = wezterm.action.SendKey { key = 'f', mods = 'ALT' } },
+  -- Ctrl+arrows: move cursor to start/end of line
+  { key = 'LeftArrow',  mods = 'CTRL', action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' } },
+  { key = 'RightArrow', mods = 'CTRL', action = wezterm.action.SendKey { key = 'e', mods = 'CTRL' } },
   {
     key = '%',
     mods = 'CTRL|SHIFT',
