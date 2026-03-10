@@ -1,5 +1,8 @@
 local wezterm = require("wezterm")
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+local resurrect_loaded, resurrect = pcall(wezterm.plugin.require, "https://github.com/MLFlexer/resurrect.wezterm")
+if not resurrect_loaded then
+  wezterm.log_error("resurrect plugin failed to load: " .. tostring(resurrect))
+end
 local config = {}
 
 config.automatically_reload_config = true
@@ -12,6 +15,13 @@ config.audible_bell = 'Disabled'
 config.keys = {
   { key = 'Backspace', mods = 'ALT',  action = wezterm.action.SendKey { key = 'w', mods = 'CTRL' } },
   { key = 'Backspace', mods = 'CTRL', action = wezterm.action.SendString '\x15' },
+  -- Alt+arrows: move cursor by word
+  { key = 'LeftArrow',  mods = 'ALT', action = wezterm.action.SendKey { key = 'b', mods = 'ALT' } },
+  { key = 'RightArrow', mods = 'ALT', action = wezterm.action.SendKey { key = 'f', mods = 'ALT' } },
+  -- Ctrl+arrows: move cursor to start/end of line
+  { key = 'LeftArrow',  mods = 'CTRL', action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' } },
+  { key = 'RightArrow', mods = 'CTRL', action = wezterm.action.SendKey { key = 'e', mods = 'CTRL' } },
+
   {
     key = '%',
     mods = 'CTRL|SHIFT',
@@ -47,6 +57,7 @@ config.keys = {
       end),
     }
   },
+
   { key = '1', mods = 'ALT', action = wezterm.action.ActivateTab(0) },
   { key = '2', mods = 'ALT', action = wezterm.action.ActivateTab(1) },
   { key = '3', mods = 'ALT', action = wezterm.action.ActivateTab(2) },
@@ -58,12 +69,16 @@ config.keys = {
   { key = '9', mods = 'ALT', action = wezterm.action.ActivateTab(8) },
   { key = '[', mods = 'ALT', action = wezterm.action.ActivateTabRelative(-1) },
   { key = ']', mods = 'ALT', action = wezterm.action.ActivateTabRelative(1) },
+  { key = 'LeftArrow',  mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
+  { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
   { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
   { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
   { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
   { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
   { key = 'j', mods = 'ALT', action = wezterm.action.ScrollByLine(1) },
   { key = 'k', mods = 'ALT', action = wezterm.action.ScrollByLine(-1) },
+  { key = 'e', mods = 'ALT', action = wezterm.action.ScrollByLine(1) },
+  { key = 'y', mods = 'ALT', action = wezterm.action.ScrollByLine(-1) },
   { key = 'd', mods = 'ALT', action = wezterm.action.ScrollByPage(0.5) },
   { key = 'u', mods = 'ALT', action = wezterm.action.ScrollByPage(-0.5) },
 
@@ -85,7 +100,9 @@ config.keys = {
     key = 'w',
     mods = 'ALT',
     action = wezterm.action_callback(function(win, pane)
-      resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+      if resurrect_loaded then
+        resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
+      end
     end),
   },
   -- restore workspaces
@@ -93,6 +110,7 @@ config.keys = {
     key = "r",
     mods = "ALT",
     action = wezterm.action_callback(function(win, pane)
+      if not resurrect_loaded then return end
       resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, "^([^/]+)") -- match before '/'
         id = string.match(id, "([^/]+)$")         -- match after '/'

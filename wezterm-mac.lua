@@ -25,17 +25,21 @@ config.keys = {
   -- Ctrl+arrows: move cursor to start/end of line
   { key = 'LeftArrow',  mods = 'CTRL', action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'RightArrow', mods = 'CTRL', action = wezterm.action.SendKey { key = 'e', mods = 'CTRL' } },
+
   {
     key = '%',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SplitHorizontal {},
   },
+
   {
     key = '_',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SplitVertical {},
   },
+
   { key = 's', mods = 'ALT', action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' } },
+
   {
     key = 's',
     mods = 'CTRL|SHIFT',
@@ -60,6 +64,7 @@ config.keys = {
       end),
     }
   },
+
   { key = '1', mods = 'ALT', action = wezterm.action.ActivateTab(0) },
   { key = '2', mods = 'ALT', action = wezterm.action.ActivateTab(1) },
   { key = '3', mods = 'ALT', action = wezterm.action.ActivateTab(2) },
