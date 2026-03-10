@@ -71,6 +71,8 @@ config.keys = {
   { key = '9', mods = 'ALT', action = wezterm.action.ActivateTab(8) },
   { key = '[', mods = 'ALT', action = wezterm.action.ActivateTabRelative(-1) },
   { key = ']', mods = 'ALT', action = wezterm.action.ActivateTabRelative(1) },
+  { key = 'LeftArrow',  mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
+  { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
   { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
   { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
   { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
